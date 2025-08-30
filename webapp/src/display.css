@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+
+@layer base {
+  html,
+  body,
+  body > div,
+  main {
+    height: 100%;
+  }
+}
