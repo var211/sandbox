@@ -1,4 +1,4 @@
-.PHONY: dev build install
+.PHONY: dev build install install-libs zsh-env
 
 dev:
 	@pnpm run dev
@@ -22,4 +22,15 @@ install-libs:
 		@tailwindcss/postcss \
 		@types/node \
 		@types/react \
-		@types/react-dom
+		@types/react-dom \
+		@supabase/supabase-js \
+		clsx \
+		class-variance-authority \
+		tailwind-merge \
+	  tw-animate-css
+
+supabase-types:
+	@supabase gen types typescript --local > src/types/database.types.ts
+
+zsh-env:
+	@echo 'alias shadcn="pnpm dlx shadcn@latest"'

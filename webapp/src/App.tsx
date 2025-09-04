@@ -1,9 +1,6 @@
-import '@/display.css'
+import { RouterProvider } from "react-router"
+import { rootRouter } from "@/routes/root"
 
-// import { AuthProvider } from '@/components/AuthProvider'
-
-export const App = () => {
-  return (
-    <h1>App</h1>
-  )
-}
+export const App = () => (
+  <RouterProvider router={rootRouter} />
+)

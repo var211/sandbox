@@ -1,0 +1,52 @@
+import { createBrowserRouter, redirect } from "react-router"
+import { IndexPage } from "@/pages/IndexPage"
+import { LoginPage, actionLoginPage } from "@/pages/LoginPage"
+import { AccountPage } from "@/pages/AccountPage"
+import { RootLayout } from "@/components/RootLayout"
+import { ErrorPage } from "@/pages/ErrorPage"
+import { AccountLayout } from "@/components/AccountLayout"
+import { api } from "@/api"
+
+export const rootRouter = createBrowserRouter([
+  {
+    id: "root",
+    path: "/",
+    Component: RootLayout,
+    ErrorBoundary: ErrorPage,
+    children: [
+      {
+        index: true,
+        Component: IndexPage
+      },
+      {
+        path: "login",
+        action: actionLoginPage,
+        Component: LoginPage
+      },
+      {
+        path: "account",
+        Component: AccountLayout,
+        loader: async () => {
+          const user = await api.getUser()
+          if (!user) {
+            throw redirect("/login")
+          }
+          return { user }
+        },
+        children: [
+          {
+            path: "",
+            Component: AccountPage
+          },
+          {
+            path: "logout",
+            action: async () => {
+              await api.logout()
+              return redirect("/")
+            }
+          }
+        ]
+      }
+    ]
+  }
+])
