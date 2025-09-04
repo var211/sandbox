@@ -1,7 +1,7 @@
-import type { User } from "@supabase/supabase-js"
+import type { AuthTokenResponsePassword, User } from "@supabase/supabase-js"
 
 export interface Api {
   getUser(): Promise<User | null>
-  login(email: string, password: string): Promise<void>
+  login(email: string, password: string): Promise<AuthTokenResponsePassword>
   logout(): Promise<void>
 }

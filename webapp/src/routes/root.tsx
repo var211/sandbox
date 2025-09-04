@@ -1,11 +1,13 @@
 import { createBrowserRouter, redirect } from "react-router"
+import { toast } from "sonner"
+import { api } from "@/api"
+import { RootLayout } from "@/components/RootLayout"
+import { AccountLayout } from "@/components/AccountLayout"
+import { ProfilePage } from "@/components/ProfilePage"
 import { IndexPage } from "@/pages/IndexPage"
 import { LoginPage, actionLoginPage } from "@/pages/LoginPage"
 import { AccountPage } from "@/pages/AccountPage"
-import { RootLayout } from "@/components/RootLayout"
 import { ErrorPage } from "@/pages/ErrorPage"
-import { AccountLayout } from "@/components/AccountLayout"
-import { api } from "@/api"
 
 export const rootRouter = createBrowserRouter([
   {
@@ -39,9 +41,14 @@ export const rootRouter = createBrowserRouter([
             Component: AccountPage
           },
           {
+            path: "profile",
+            Component: ProfilePage
+          },
+          {
             path: "logout",
             action: async () => {
               await api.logout()
+              toast("Signed out")
               return redirect("/")
             }
           }

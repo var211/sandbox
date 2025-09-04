@@ -4,21 +4,32 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-// import { logger } from "@/utils/logger"
+import { logger } from "@/utils/logger"
 import { Form, redirect } from "react-router"
 import { api } from "@/api"
+import { toast } from "sonner"
 
 export const actionLoginPage = async ({ request }: { request: Request }) => {
   const formData = await request.formData()
   const email = formData.get('email') as string
   if (!email) {
-    throw new Error('email is missing')
+    toast.error("Email is missing")
+    return
   }
   const password = formData.get('password') as string
   if (!password) {
-    throw new Error('password is missing')
+    toast.error("Password is missing")
+    return
   }
-  await api.login(email, password)
+  try {
+    const loginData = await api.login(email, password)
+    logger.debug(loginData)
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    toast.error(errorMessage)
+    return
+  }
+  toast("Signed in")
   return redirect('/account')
 }
 

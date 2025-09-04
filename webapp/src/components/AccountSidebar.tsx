@@ -8,12 +8,27 @@ import {
   SidebarMenuButton,
   SidebarMenuItem
 } from "@/components/ui/sidebar"
-import { LogOutIcon } from "lucide-react"
-import { Form } from "react-router"
+import { LogOutIcon, CircleUserRoundIcon } from "lucide-react"
+import { Form, Link } from "react-router"
 
 export const AccountSidebar = () => (
   <Sidebar>
     <SidebarContent className="pt-(--spacing12)">
+      <SidebarGroup>
+        <SidebarGroupLabel>Account</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton className="cursor-pointer" asChild>
+                <Link to="/account/profile">
+                  <CircleUserRoundIcon />
+                  <span>Profile</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
       <SidebarGroup>
         <SidebarGroupLabel>Auth</SidebarGroupLabel>
         <SidebarGroupContent>

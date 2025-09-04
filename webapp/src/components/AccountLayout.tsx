@@ -6,7 +6,7 @@ import { Outlet } from "react-router"
 export const AccountLayout = () => (
   <SidebarProvider>
     <AccountSidebar />
-    <main>
+    <main className="grow">
       <SidebarTrigger className="cursor-pointer" />
       <Outlet />
     </main>
