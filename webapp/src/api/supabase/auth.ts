@@ -1,15 +1,15 @@
 import type { Api } from "@/types/api.types"
-import { supabase } from "@/utils/supabase"
+import { getSupabase } from "@/utils/supabase"
 
 export const authApi: Pick<Api, "login" | "logout"> = {
   async login(email: string, password: string) {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error } = await getSupabase().auth.signInWithPassword({ email, password })
     if (error) {
       throw error
     }
     return data
   },
   async logout() {
-    await supabase.auth.signOut()
+    await getSupabase().auth.signOut()
   }
 }

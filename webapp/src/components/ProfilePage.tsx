@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label"
 import { useEffect, useReducer } from "react"
 import type { UserProfileState, UserProfileAction } from "@/types/user.types"
 import { api } from "@/api"
+import { logger } from "@/utils/logger"
 
 const profileReducer = (state: UserProfileState, action: UserProfileAction) => {
   switch (action.type) {
@@ -29,29 +30,30 @@ const profileReducer = (state: UserProfileState, action: UserProfileAction) => {
         isError: true
       }
     default:
-      throw new Error('invalid action type')
+      throw new Error("invalid action type")
   }
 }
 
 export const ProfilePage = () => {
   const [profile, dispatchProfile] = useReducer(
     profileReducer,
-    { data: { email: '' }, isLoading: false, isError: false }
+    { data: { email: "" }, isLoading: false, isError: false }
   )
 
   useEffect(() => {
     async function fetchProfile() {
       const profile = await api.getUserProfile()
       dispatchProfile({
-        type: 'success',
+        type: "success",
         payload: profile
       })
     }
-    dispatchProfile({ type: 'load' })
+    dispatchProfile({ type: "load" })
     try {
       fetchProfile()
     } catch (error) {
-      dispatchProfile({ type: 'fail' })
+      logger.error(error)
+      dispatchProfile({ type: "fail" })
     }
   }, [])
 

@@ -1,4 +1,4 @@
-import { supabase } from '@/utils/supabase.ts'
+// import { supabase } from '@/utils/supabase.ts'
 
 export const Debug = () => {
   const debug = 42

@@ -1,13 +1,14 @@
-import { createBrowserRouter, redirect } from "react-router"
-import { toast } from "sonner"
-import { api } from "@/api"
-import { RootLayout } from "@/components/RootLayout"
 import { AccountLayout } from "@/components/AccountLayout"
-import { ProfilePage } from "@/components/ProfilePage"
-import { IndexPage } from "@/pages/IndexPage"
-import { LoginPage, actionLoginPage } from "@/pages/LoginPage"
 import { AccountPage } from "@/pages/AccountPage"
 import { ErrorPage } from "@/pages/ErrorPage"
+import { IndexPage } from "@/pages/IndexPage"
+import { LoginPage, actionLoginPage } from "@/pages/LoginPage"
+import { ProfilePage } from "@/components/ProfilePage"
+import { RootLayout } from "@/components/RootLayout"
+import { api } from "@/api"
+import { createBrowserRouter, redirect } from "react-router"
+import { toast } from "sonner"
+// import { logger } from "@/utils/logger"
 
 export const rootRouter = createBrowserRouter([
   {
