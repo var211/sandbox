@@ -1,5 +1,7 @@
 INITIAL_DDL := migrations/20250831053834_initial-ddl.sql
-.PHONY: initial-ddl reset
+
+.PHONY: initial-ddl reset start
+
 
 initial-ddl:
 	@echo make initial-ddl
@@ -14,3 +16,8 @@ initial-ddl:
 reset: initial-ddl
 	@echo reset
 	@supabase db reset
+
+
+start:
+	@echo start local devel
+	@supabase start
